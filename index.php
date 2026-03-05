@@ -50,15 +50,15 @@ $vistasActuales = $contadores[$plataforma];
     }
 
     :root {
-      --primary: #0a0a0a;
-      --secondary: #171717;
-      --accent: #00732C;
-      --accent-hover: #005a22;
-      --text-primary: #fafafa;
-      --text-secondary: #a1a1aa;
-      --surface: #1c1c1c;
-      --border: #2a2a2a;
-      --shadow: rgba(0, 0, 0, 0.4);
+      --primary: #f8fafc;
+      --secondary: #e2e8f0;
+      --accent: #068740;
+      --accent-hover: #046530;
+      --text-primary: #068740;
+      --text-secondary: #AB9919;
+      --surface: #ffffff;
+      --border: #cbd5e1;
+      --shadow: rgba(0, 0, 0, 0.1);
     }
 
     body {
@@ -92,8 +92,8 @@ $vistasActuales = $contadores[$plataforma];
     }
 
     @keyframes glow {
-      0%, 100% { box-shadow: 0 0 20px rgba(0, 115, 44, 0.3); }
-      50% { box-shadow: 0 0 40px rgba(0, 115, 44, 0.5); }
+      0%, 100% { box-shadow: 0 0 20px rgba(6, 135, 64, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(6, 135, 64, 0.5); }
     }
 
     /* Container */
@@ -105,7 +105,7 @@ $vistasActuales = $contadores[$plataforma];
 
     /* Header Section */
     .header {
-      padding: 80px 0 60px; /* Reducido un poco para dar espacio al logo */
+      padding: 50px 0 30px; /* Reducido un poco para dar espacio al logo */
       text-align: center;
       background: linear-gradient(180deg, var(--secondary) 0%, var(--primary) 100%);
       position: relative;
@@ -138,7 +138,7 @@ $vistasActuales = $contadores[$plataforma];
       font-size: clamp(2.5rem, 8vw, 4.5rem);
       font-weight: 800;
       letter-spacing: -0.02em;
-      margin-bottom: 24px;
+      
       opacity: 0;
       animation: fadeIn 1s ease-out 0.2s forwards;
       background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
@@ -290,7 +290,7 @@ $vistasActuales = $contadores[$plataforma];
   <header class="header">
     <div class="container">
       <img src="cenpecar-logo.png" alt="Cenpecar Logo" class="header-logo">
-      <h1 class="hero-title">Título del video</h1>
+      <h1 class="hero-title">Criterios ESG</h1>
       <p class="hero-subtitle">Posible subtitulo del video</p>
     </div>
   </header>
@@ -303,7 +303,7 @@ $vistasActuales = $contadores[$plataforma];
           class="video-player" 
           id="mainVideo"
           controls
-          poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080' viewBox='0 0 1920 1080'%3E%3Crect fill='%231c1c1c' width='1920' height='1080'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23a1a1aa' font-family='system-ui' font-size='32'%3EHaga click para reproducir%3C/text%3E%3C/svg%3E"
+          poster="portada.png"
         >
           <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
           Su navegador no soporta la etiqueta de vídeo.
