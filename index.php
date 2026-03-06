@@ -52,7 +52,7 @@ $vistasActuales = $contadores[$plataforma];
     }
 
     :root {
-      --primary: #f0f4f8;
+      --primary: #f8fafc;
       --secondary: #e2e8f0;
       --accent: #00732C;
       --accent-hover: #046530;
@@ -75,32 +75,6 @@ $vistasActuales = $contadores[$plataforma];
       position: relative;
     }
 
-    /* Elementos decorativos de fondo (Blobs) */
-    .bg-blob {
-      position: fixed;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
-      filter: blur(100px);
-      z-index: -1;
-      opacity: 0.15;
-      pointer-events: none;
-      animation: pulse 10s ease-in-out infinite alternate;
-      will-change: opacity;
-    }
-
-    .blob-1 {
-      background: var(--accent);
-      top: -100px;
-      left: -100px;
-    }
-
-    .blob-2 {
-      background: var(--accent-alt);
-      bottom: -100px;
-      right: -100px;
-      animation-delay: -5s;
-    }
 
     /* Animations */
     @keyframes fadeIn {
@@ -113,10 +87,6 @@ $vistasActuales = $contadores[$plataforma];
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 0.15; }
-      50% { opacity: 0.25; }
-    }
 
     @keyframes countUp {
       0% { transform: scale(1); color: var(--text-primary); }
@@ -147,7 +117,7 @@ $vistasActuales = $contadores[$plataforma];
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
     }
 
     .header-logo {
@@ -209,18 +179,18 @@ $vistasActuales = $contadores[$plataforma];
       margin: 0 auto;
       border-radius: 24px;
       overflow: hidden;
-      background: rgba(255, 255, 255, 0.4);
-      backdrop-filter: blur(25px) saturate(180%);
-      -webkit-backdrop-filter: blur(25px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      box-shadow: 0 25px 50px -12px var(--shadow), 0 0 0 1px rgba(255,255,255,1) inset;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255,255,255,1) inset;
       transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
       padding: 12px; /* Marco estilo TV moderna */
     }
 
     .video-wrapper:hover {
       transform: translateY(-6px) scale(1.01);
-      box-shadow: 0 30px 50px -12px rgba(6, 135, 64, 0.15), 0 0 0 1px rgba(255,255,255,0.9) inset;
+      box-shadow: 0 30px 50px -12px rgba(6, 135, 64, 0.2), 0 0 0 1px rgba(255,255,255,0.9) inset;
     }
 
     .video-wrapper:focus-within {
@@ -247,20 +217,20 @@ $vistasActuales = $contadores[$plataforma];
     .info-panel {
       max-width: 420px;
       margin: 0 auto;
-      background: rgba(255, 255, 255, 0.4);
-      backdrop-filter: blur(30px) saturate(200%);
-      -webkit-backdrop-filter: blur(30px) saturate(200%);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
       border-radius: 24px;
       padding: 36px 40px;
       text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      box-shadow: 0 20px 40px -10px var(--shadow), 0 0 0 1px rgba(255,255,255,1) inset;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255,255,255,1) inset;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .info-panel:hover {
       transform: translateY(-4px);
-      box-shadow: 0 20px 45px -5px rgba(171, 153, 25, 0.15), 0 0 0 1px rgba(255,255,255,0.8) inset;
+      box-shadow: 0 20px 45px -5px rgba(133, 116, 6, 0.2), 0 0 0 1px rgba(255,255,255,0.8) inset;
     }
 
     .info-label {
@@ -347,9 +317,6 @@ $vistasActuales = $contadores[$plataforma];
   </style>
 </head>
 <body>
-  <!-- Fondos Vibrantes (Glass Blobs) -->
-  <div class="bg-blob blob-1"></div>
-  <div class="bg-blob blob-2"></div>
 
   <!-- Header Section -->
   <header class="header">
