@@ -43,6 +43,8 @@ $vistasActuales = $contadores[$plataforma];
   <link rel="icon" type="image/png" href="cenpecar-logo.png">
   <title>Titulo del video</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
     * {
       margin: 0;
       padding: 0;
@@ -50,39 +52,70 @@ $vistasActuales = $contadores[$plataforma];
     }
 
     :root {
-      --primary: #f8fafc;
+      --primary: #f0f4f8;
       --secondary: #e2e8f0;
-      --accent: #068740;
+      --accent: #00732C;
       --accent-hover: #046530;
-      --text-primary: #068740;
-      --text-secondary: #AB9919;
-      --surface: #ffffff;
-      --border: #cbd5e1;
-      --shadow: rgba(0, 0, 0, 0.1);
+      --accent-alt: #C99616;
+      --text-primary: #1a202c;
+      --text-secondary: #4a5568;
+      --surface: rgba(255, 255, 255, 0.7);
+      --surface-border: rgba(255, 255, 255, 0.5);
+      --shadow: rgba(6, 135, 64, 0.08); /* Sombra verde sutil */
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: var(--primary);
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--primary);
+      background-attachment: fixed;
       color: var(--text-primary);
       min-height: 100vh;
       line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Elementos decorativos de fondo (Blobs) */
+    .bg-blob {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      filter: blur(100px);
+      z-index: -1;
+      opacity: 0.15;
+      pointer-events: none;
+      animation: pulse 10s ease-in-out infinite alternate;
+      will-change: opacity;
+    }
+
+    .blob-1 {
+      background: var(--accent);
+      top: -100px;
+      left: -100px;
+    }
+
+    .blob-2 {
+      background: var(--accent-alt);
+      bottom: -100px;
+      right: -100px;
+      animation-delay: -5s;
     }
 
     /* Animations */
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes slideUp {
-      from { opacity: 0; transform: translateY(40px); }
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
+      0%, 100% { opacity: 0.15; }
+      50% { opacity: 0.25; }
     }
 
     @keyframes countUp {
@@ -105,11 +138,16 @@ $vistasActuales = $contadores[$plataforma];
 
     /* Header Section */
     .header {
-      padding: 50px 0 30px; /* Reducido un poco para dar espacio al logo */
+      padding: 50px 0 40px; 
       text-align: center;
-      background: linear-gradient(180deg, var(--secondary) 0%, var(--primary) 100%);
       position: relative;
+      z-index: 10;
       overflow: hidden;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
     }
 
     .header-logo {
@@ -128,7 +166,7 @@ $vistasActuales = $contadores[$plataforma];
       top: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 600px;
+      width: min(600px, 100vw);
       height: 600px;
       background: radial-gradient(circle, rgb(0 251 96 / 17%) 0%, transparent 70%);
       pointer-events: none;
@@ -137,52 +175,56 @@ $vistasActuales = $contadores[$plataforma];
     .hero-title {
       font-size: clamp(2.5rem, 8vw, 4.5rem);
       font-weight: 800;
-      letter-spacing: -0.02em;
-      
+      letter-spacing: -0.04em;  
+      color: var(--accent); /* Nombra principal Verde */
       opacity: 0;
       animation: fadeIn 1s ease-out 0.2s forwards;
-      background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      text-shadow: 0 4px 12px rgba(6, 135, 64, 0.15);
+      will-change: transform, opacity;
     }
 
     .hero-subtitle {
-      font-size: clamp(1.1rem, 3vw, 1.5rem);
-      color: var(--text-secondary);
+      font-size: clamp(1.1rem, 3vw, 1.4rem);
+      color: var(--accent-alt); /* Subtítulo Amarillo */
       max-width: 600px;
       margin: 0 auto;
       opacity: 0;
       animation: fadeIn 1s ease-out 0.5s forwards;
-      font-weight: 400;
-      text-transform: capitalize;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
     /* Video Section */
     .video-section {
-      padding: 60px 0;
+      padding: 80px 0 60px; /* Aumentado top a 80px */
       opacity: 0;
-      animation: slideUp 1s ease-out 0.8s forwards;
+      animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+      will-change: transform, opacity;
     }
 
     .video-wrapper {
       position: relative;
       max-width: 900px;
       margin: 0 auto;
-      border-radius: 20px;
+      border-radius: 24px;
       overflow: hidden;
-      background: var(--surface);
-      box-shadow: 0 25px 50px -12px var(--shadow), 0 0 0 1px var(--border);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(25px) saturate(180%);
+      -webkit-backdrop-filter: blur(25px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 25px 50px -12px var(--shadow), 0 0 0 1px rgba(255,255,255,1) inset;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+      padding: 12px; /* Marco estilo TV moderna */
     }
 
     .video-wrapper:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 35px 60px -15px var(--shadow), 0 0 0 1px var(--border);
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 30px 50px -12px rgba(6, 135, 64, 0.15), 0 0 0 1px rgba(255,255,255,0.9) inset;
     }
 
     .video-wrapper:focus-within {
-      animation: glow 2s ease-in-out infinite;
+      animation: glow 3s ease-in-out infinite alternate;
     }
 
     .video-player {
@@ -190,59 +232,60 @@ $vistasActuales = $contadores[$plataforma];
       height: auto;
       display: block;
       aspect-ratio: 16 / 9;
-      background: var(--secondary);
+      background: #222;
+      border-radius: 16px; /* Borde interno del video */
     }
 
     /* Info Panel */
     .info-section {
       padding: 40px 0 100px;
       opacity: 0;
-      animation: slideUp 1s ease-out 1.1s forwards;
+      animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;
+      will-change: transform, opacity;
     }
 
     .info-panel {
-      max-width: 400px;
+      max-width: 420px;
       margin: 0 auto;
-      background: var(--surface);
-      border-radius: 16px;
-      padding: 32px 40px;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(30px) saturate(200%);
+      -webkit-backdrop-filter: blur(30px) saturate(200%);
+      border-radius: 24px;
+      padding: 36px 40px;
       text-align: center;
-      box-shadow: 0 10px 40px -10px var(--shadow), 0 0 0 1px var(--border);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 20px 40px -10px var(--shadow), 0 0 0 1px rgba(255,255,255,1) inset;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .info-panel:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 50px -10px var(--shadow), 0 0 0 1px var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 45px -5px rgba(171, 153, 25, 0.15), 0 0 0 1px rgba(255,255,255,0.8) inset;
     }
 
     .info-label {
-      font-size: 0.875rem;
+      font-size: 0.9rem;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-secondary);
+      letter-spacing: 0.15em;
+      color: var(--accent-alt); /* Amarillo */
       margin-bottom: 12px;
-      font-weight: 600;
-    }
-
-    .view-counter {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
+      font-weight: 800;
     }
 
     .counter-icon {
-      width: 32px;
-      height: 32px;
-      fill: var(--accent);
+      width: 36px;
+      height: 36px;
+      fill: var(--accent); /* Verde */
+      filter: drop-shadow(0 4px 6px rgba(6, 135, 64, 0.2));
     }
 
     .counter-number {
-      font-size: 3rem;
-      font-weight: 700;
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--accent); /* Verde */
       font-variant-numeric: tabular-nums;
       transition: transform 0.3s ease, color 0.3s ease;
+      letter-spacing: -0.02em;
     }
 
     .counter-number.animating {
@@ -253,45 +296,67 @@ $vistasActuales = $contadores[$plataforma];
     .footer {
       padding: 40px 0;
       text-align: center;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid rgba(255,255,255,0.3);
       opacity: 0;
       animation: fadeIn 1s ease-out 1.4s forwards;
+      background: linear-gradient(0deg, var(--surface) 0%, transparent 100%);
     }
 
     .footer p {
       color: var(--text-secondary);
-      font-size: 0.875rem;
+      font-size: 0.9rem;
+      font-weight: 600;
     }
 
     /* Responsive */
     @media (max-width: 768px) {
-      .header { padding: 80px 0 60px; }
-      .header-logo { max-width: 70px; }
-      .video-section { padding: 40px 0; }
-      .video-wrapper { border-radius: 16px; margin: 0 16px; }
-      .info-panel { margin: 0 16px; padding: 24px 32px; }
+      .bg-blob { display: none; }
+      .container { padding: 0 20px; width: 100%; box-sizing: border-box; }
+      .header { padding: 40px 0 30px; }
+      .header-logo { max-width: 80px; }
+      .hero-title { font-size: 2rem; margin-bottom: 12px; }
+      .hero-subtitle { font-size: 0.85rem; padding: 0 10px; }
+      .video-section { padding: 40px 0 20px; } /* Más separación del header en móviles */
+      .video-wrapper { 
+        border-radius: 20px; 
+        margin: 0 auto; 
+        padding: 8px;
+        width: 100%;
+        max-width: 100%;
+      }
+      .info-section { padding: 20px 0 60px; }
+      .info-panel { 
+        border-radius: 20px; 
+        padding: 30px 20px; 
+        width: 100%; 
+        max-width: 350px; /* Evita que crezca demasiado pero se ajusta */
+      }
       .counter-number { font-size: 2.5rem; }
-      .info-section { padding: 30px 0 80px; }
     }
 
     @media (max-width: 480px) {
-      .header { padding: 60px 0 40px; }
-      .header-logo { max-width: 60px; }
-      .hero-subtitle { padding: 0 16px; }
-      .video-wrapper { border-radius: 12px; }
-      .info-panel { border-radius: 12px; padding: 20px 24px; }
+      .container { padding: 0 16px; }
+      .header { padding: 30px 0 20px; }
+      .header-logo { max-width: 65px; }
+      .hero-title { font-size: 1.7rem; }
+      .video-wrapper { border-radius: 16px; padding: 6px; }
+      .info-panel { padding: 25px 15px; }
       .counter-number { font-size: 2rem; }
-      .counter-icon { width: 24px; height: 24px; }
+      .counter-icon { width: 30px; height: 30px; }
     }
   </style>
 </head>
 <body>
+  <!-- Fondos Vibrantes (Glass Blobs) -->
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+
   <!-- Header Section -->
   <header class="header">
     <div class="container">
       <img src="cenpecar-logo.png" alt="Cenpecar Logo" class="header-logo">
       <h1 class="hero-title">Criterios ESG</h1>
-      <p class="hero-subtitle">Posible subtitulo del video</p>
+      <p class="hero-subtitle">Ambientales, Sociales y de Gobernanza</p>
     </div>
   </header>
 
